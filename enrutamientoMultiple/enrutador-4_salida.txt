@@ -1,0 +1,25 @@
+terminal length 0
+Enrutador-4#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Enrutador-4(config)#ip route 10.0.5.0 255.255.255.0 10.0.2.253
+Enrutador-4(config)#router rip
+Enrutador-4(config-router)#version 2
+Enrutador-4(config-router)#passive-interface f3/0
+Enrutador-4(config-router)#no auto-summary
+Enrutador-4(config-router)#redistribute static
+Enrutador-4(config-router)#redistribute ospf 1 metric 1
+Enrutador-4(config-router)#network 10.0.1.0
+Enrutador-4(config-router)#network 10.0.2.0
+Enrutador-4(config-router)#network 10.0.3.0
+Enrutador-4(config-router)#network 10.0.4.0
+Enrutador-4(config-router)#exit
+Enrutador-4(config)#router ospf 1
+Enrutador-4(config-router)#passive-interface f3/0
+Enrutador-4(config-router)#redistribute static subnets
+Enrutador-4(config-router)#redistribute rip subnets
+Enrutador-4(config-router)#network 10.0.1.0 0.0.0.255 area 0
+Enrutador-4(config-router)#network 10.0.2.0 0.0.0.255 area 0
+Enrutador-4(config-router)#network 10.0.3.0 0.0.0.255 area 0
+Enrutador-4(config-router)#network 10.0.4.0 0.0.0.255 area 0
+Enrutador-4(config-router)#end
+Enrutador-4#
